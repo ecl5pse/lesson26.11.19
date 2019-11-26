@@ -1,5 +1,4 @@
-
-'use strick';
+'use strict';
 
 const SOCIAL_NETWORKS = Object.freeze({
 
@@ -79,9 +78,75 @@ const  users = [
 
         ]
 
-    }
+    },
+    {
+        name:"Dart",
+        surname:"Waider",
+        description: "extemely large text ...",
+        avatarSrc: "http://comic-cons.xyz/wp-content/uploads/Star-Wars-avatar-icon-Darth-Vader.png",
+        contacts : [
+            {
+                name:SOCIAL_NETWORKS.FACEBOOK,
+                href:'#'
+            },
+            {
+                name:SOCIAL_NETWORKS.TWITTER,
+                href:'#'
+            },
+            {
+                name:SOCIAL_NETWORKS.SKYPE,
+                href:'#'
+            },
+
+        ]
+
+    },
+    {
+        name:"Dart",
+        surname:"Waider",
+        description: "extemely large text ...",
+        avatarSrc: "http://comic-cons.xyz/wp-content/uploads/Star-Wars-avatar-icon-Darth-Vader.png",
+        contacts : [
+            {
+                name:SOCIAL_NETWORKS.FACEBOOK,
+                href:'#'
+            },
+            {
+                name:SOCIAL_NETWORKS.TWITTER,
+                href:'#'
+            },
+            {
+                name:SOCIAL_NETWORKS.SKYPE,
+                href:'#'
+            },
+
+        ]
+
+    },
 
 ];
+
+const userListElem = document.getElementById("usersList");
+
+appendUsersListItems(userListElem, users);
+
+
+
+function appendUsersListItems(usersListElem, users) {
+    users.forEach(
+        user => {
+            usersListElem.append(createUserListItemElem(user));
+        }
+    );
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -89,44 +154,31 @@ function createUserListItemElem (user) {
 
     const userListItemElem = document.createElement("li");
 
-    userListItemElem.append(createUserListItemElem(user));
+    userListItemElem.append(createUserCardElem(user));
+
     return userListItemElem;
 
     
 };
 
 
-function createUserCardElem(user) {
+function createUserCardElem (user) {
 
     const  userCardWrapperElem = document.createElement("div");
 
     userCardWrapperElem.classList.add('userCardWrapper');
-    userCardWrapperElem.classList.add('flexConteiner');
+    userCardWrapperElem.classList.add('flexContainer');
     userCardWrapperElem.classList.add('flexWrap');
-    userCardWrapperElem.classList.add('justifyContaintEvently');
+    userCardWrapperElem.classList.add('justifyContentEvenly');
 
 
-    userCardWrapperElem.append(createUserPictureElemnt(user));
+    userCardWrapperElem.append(createUserPictureElem (user));
+    userCardWrapperElem.append(createUserFullNameElem(user));
+    userCardWrapperElem.append(createUserDescription(user));
 
-
-
+    return userCardWrapperElem;
 
 };
-
-
-function createUserPictureElem(user) {
-
-    const userPictureContainerElem = document.createElement("div");
-    userPictureContainerElem.classList.add('userPictureConteiner');
-
-    userPictureContainerElem.append( getUserPictureElem(user) );
-
-    return userPictureContainerElem;
-
-
-
-
-}
 
 
 function getUserPictureElem({avatarSrc}) {
@@ -140,9 +192,32 @@ function getUserPictureElem({avatarSrc}) {
 
 };
 
+function createUserPictureElem(user) {
+    const userPictureContainerElem = document.createElement("div");
+    userPictureContainerElem.classList.add('userPictureContainer');
 
-function createUserFullNameElem([{name , surname}) {
+    userPictureContainerElem.append( getUserPictureElem(user) );
+    return userPictureContainerElem;
+}
 
-    const userFullName = doc
+function createUserFullNameElem({name , surname}) {
+
+    const userFullNameElem = document.createElement("div");
+
+    userFullNameElem.innerText = `${name} ${surname}`;
+
+    return userFullNameElem;
+
+};
+
+function createUserDescription({description}) {
+
+    const userDescriptionElem = document.createElement('p');
+
+    userDescriptionElem.classList.add("userDescription");
+
+    userDescriptionElem.innerText = `${description}`;
+
+    return userDescriptionElem;
 
 };
