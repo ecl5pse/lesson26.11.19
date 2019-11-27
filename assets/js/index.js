@@ -11,7 +11,7 @@ const SOCIAL_NETWORKS = Object.freeze({
 
 
 const  users = [
-    {
+    {   id:1,
         name:"Dart",
         surname:"Waider",
         description: "extemely large text ...",
@@ -34,7 +34,7 @@ const  users = [
 
     },
 
-    {
+    {   id:2,
         name:"Dart",
         surname:"Waider",
         description: "extemely large text ...",
@@ -57,7 +57,7 @@ const  users = [
 
     },
 
-    {
+    {   id:3,
         name:"Dart",
         surname:"Waider",
         description: "extemely large text ...",
@@ -79,7 +79,7 @@ const  users = [
         ]
 
     },
-    {
+    {   id:4,
         name:"Dart",
         surname:"Waider",
         description: "extemely large text ...",
@@ -101,7 +101,7 @@ const  users = [
         ]
 
     },
-    {
+    {   id:5,
         name:"Dart",
         surname:"Waider",
         description: "extemely large text ...",
@@ -154,6 +154,8 @@ function createUserListItemElem (user) {
 
     const userListItemElem = document.createElement("li");
 
+    userListItemElem.setAttribute("id" , user.id);
+
     userListItemElem.append(createUserCardElem(user));
 
     return userListItemElem;
@@ -166,7 +168,7 @@ function createUserCardElem (user) {
 
     const  userCardWrapperElem = document.createElement("div");
 
-    userCardWrapperElem.classList.add('userCardWrapper');
+    userCardWrapperElem.classList.add('userCardWrapper' );
     userCardWrapperElem.classList.add('flexContainer');
     userCardWrapperElem.classList.add('flexWrap');
     userCardWrapperElem.classList.add('justifyContentEvenly');
@@ -175,6 +177,8 @@ function createUserCardElem (user) {
     userCardWrapperElem.append(createUserPictureElem (user));
     userCardWrapperElem.append(createUserFullNameElem(user));
     userCardWrapperElem.append(createUserDescription(user));
+    userCardWrapperElem.append(createUserRemoveButton(user));
+    userCardWrapperElem.append(createUserContactsContainerElem(user));
 
     return userCardWrapperElem;
 
@@ -202,8 +206,9 @@ function createUserPictureElem(user) {
 
 function createUserFullNameElem({name , surname}) {
 
-    const userFullNameElem = document.createElement("div");
-
+    const userFullNameElem = document.createElement("h3");
+    userFullNameElem.classList.add('userFullName');
+    userFullNameElem.classList.add('userFullNameMargin');
     userFullNameElem.innerText = `${name} ${surname}`;
 
     return userFullNameElem;
@@ -221,3 +226,37 @@ function createUserDescription({description}) {
     return userDescriptionElem;
 
 };
+
+
+function createUserContactsContainerElem(user) {
+
+    const userContactsContainerElem = document.createElement('div');
+    userContactsContainerElem.classList.add("userContactsContainer");
+
+
+
+
+    return userContactsContainerElem;
+
+};
+
+function createUserRemoveButton(user) {
+
+    const userRemoveButton = document.createElement("div");
+
+    userRemoveButton.classList.add("remove");
+    userRemoveButton.innerText = "Remove";
+
+    userRemoveButton.addEventListener('click' , (e) =>{
+        e.stopPropagation();
+        const userListItemElem = document.getElementById(user.id);
+        userListItemElem.remove();
+    });
+
+    return userRemoveButton;
+
+    
+}
+
+
+
